@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.5.0](https://github.com/Darsh76/my-node-app/compare/v1.4.0...v1.5.0) (2025-04-08)
+
+
+### Features
+
+* Update deploy-node-app.yml ([1622a88](https://github.com/Darsh76/my-node-app/commit/1622a883185a322c0efe41ea4e6ba41ee86f7572))
+* Update deploy-node-app.yml ([a4a2dc0](https://github.com/Darsh76/my-node-app/commit/a4a2dc0ec05a6088e3be80d8ae215189eddffe81))
+* Update deploy-node-app.yml ([4551561](https://github.com/Darsh76/my-node-app/commit/45515618d1f43efe2850164bead0cf9939d3b1ec))
+* Update deploy-node-app.yml ([5e60e88](https://github.com/Darsh76/my-node-app/commit/5e60e8839848f2702090d6f2ef56ab8a0abcef2e))
+* Update deploy-node-app.yml ([d1b067d](https://github.com/Darsh76/my-node-app/commit/d1b067da5a380cdeaf1a39ed1487c34c897547c3))
+* Update deploy-node-app.yml ([80fc3f5](https://github.com/Darsh76/my-node-app/commit/80fc3f54f095ed1a429fc3276b584d495a14cc1d))
+
+
+### Bug Fixes
+
+* resolve bug in API endpoint ([3df8161](https://github.com/Darsh76/my-node-app/commit/3df81610bb167e9336c6c60c15f34a6b68baa20d))
+
 ## [1.4.0](https://github.com/Darsh76/my-node-app/compare/v1.3.0...v1.4.0) (2025-04-08)
 
 
