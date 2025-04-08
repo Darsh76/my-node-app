@@ -48,8 +48,8 @@ jobs:
         run: echo "VERSION=${{ needs.release.outputs.tag_name }}" >> $GITHUB_ENV
 
       - name: Debug - Show Version
-        run: echo "Version: ${{ env.VERSION }}"
-
+        run: echo "Version: $VERSION"
+        
       - name: Build and Push Docker Image
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/node-app:${{ env.VERSION }} \
