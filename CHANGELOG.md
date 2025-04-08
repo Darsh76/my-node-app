@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/Darsh76/my-node-app/compare/v1.3.0...v1.4.0) (2025-04-08)
+
+
+### Features
+
+* implemented Docker ([4070f24](https://github.com/Darsh76/my-node-app/commit/4070f245d28cd79025cc92d712897a0231da4274))
+
 ## [1.3.0](https://github.com/Darsh76/my-node-app/compare/v1.2.0...v1.3.0) (2025-04-08)
 
 
