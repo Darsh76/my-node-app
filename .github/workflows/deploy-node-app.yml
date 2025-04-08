@@ -1,4 +1,4 @@
-name: Release and Deploy My Node App
+name: Release, Build, and Deploy Node App
 
 on:
   push:
@@ -14,8 +14,13 @@ jobs:
       pull-requests: write
       issues: write
 
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+
     steps:
       - name: Release Please
+        id: release
         uses: googleapis/release-please-action@v4
         with:
           release-type: node
@@ -23,6 +28,7 @@ jobs:
 
   docker:
     needs: release
+    if: ${{ needs.release.outputs.release_created == 'true' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -38,10 +44,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Extract Version from Git Tags
-        id: get_version
-        run: |
-          echo "VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+      - name: Set version from release-please
+        run: echo "VERSION=${{ needs.release.outputs.tag_name }}" >> $GITHUB_ENV
+
+      - name: Debug - Show Version
+        run: echo "Version: ${{ env.VERSION }}"
 
       - name: Build and Push Docker Image
         run: |
@@ -71,6 +78,6 @@ jobs:
             docker rm -f my-node-app || true
 
             echo "Starting new container..."
-            docker run -d --name my-node-app -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/node-app:latest
+            docker run -d --name my-node-app -p 3000:3000 ${{ secrets.DOCKERHUB_USERNAME }}/node-app:latest
 
             echo "Deployment successful."
