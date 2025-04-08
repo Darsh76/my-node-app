@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/Darsh76/my-node-app/compare/v1.1.0...v1.2.0) (2025-04-08)
+
+
+### Features
+
+* add auto versioning ([7da2629](https://github.com/Darsh76/my-node-app/commit/7da2629bfa7967b0182efe3d7b1a259744ef3c9c))
+
 ## [1.1.0](https://github.com/Darsh76/my-node-app/compare/v1.0.0...v1.1.0) (2025-04-08)
 
 
