@@ -6,14 +6,6 @@ on:
       - main
 
 jobs:
-  name: Release and Deploy My Node App
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
   release:
     runs-on: ubuntu-latest
     permissions:
@@ -45,38 +37,6 @@ jobs:
           else
             echo "No open release PR found."
           fi
-
-  deploy:
-    needs: release
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
-      - name: Deploy using SSH
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.MY_NODE_APP_HOST }}
-          username: ${{ secrets.MY_NODE_APP_USER }}
-          key: ${{ secrets.MY_NODE_APP_KEY }}
-          port: ${{ secrets.MY_NODE_APP_PORT }}
-          script: |
-            set -e
-            echo "Connecting to EC2 Instance..."
-            cd /home/ubuntu/my-node-app || exit 1
-            echo "Current Directory: $(pwd)"
-            echo "Node Version: $(node -v)"
-            echo "Git Status Before Pull:"
-            git status || exit 1
-            git pull origin main || exit 1
-            echo "Installing required packages..."
-            npm install
-            echo "Restarting application using PM2..."
-            pm2 restart my-node-app || pm2 start index.js --name my-node-app
-            pm2 save
-            echo "Deployment Completed Successfully"
-
 
   deploy:
     needs: release
