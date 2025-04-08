@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.3.0](https://github.com/Darsh76/my-node-app/compare/v1.2.0...v1.3.0) (2025-04-08)
+
+
+### Features
+
+* add auto versioning ([ed1d281](https://github.com/Darsh76/my-node-app/commit/ed1d281c44a11d78625a95427092931254c0e1eb))
+* auto versioning ([bb5d354](https://github.com/Darsh76/my-node-app/commit/bb5d354bd6196e887f0e03ae7cfa2489c74cec51))
+* Update deploy-node-app.yml ([5149dcd](https://github.com/Darsh76/my-node-app/commit/5149dcd70b6ef5ac4c937e56e899b47e297dfc4b))
+* Update deploy-node-app.yml ([2deca88](https://github.com/Darsh76/my-node-app/commit/2deca88c8fc674f1b49bf44464a18ef24a4992ec))
+
 ## [1.2.0](https://github.com/Darsh76/my-node-app/compare/v1.1.0...v1.2.0) (2025-04-08)
 
 
