@@ -48,10 +48,10 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/node-app:$VERSION \
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:$VERSION \
                        -t ${{ secrets.DOCKERHUB_USERNAME }}/node-app:latest -f ./Dockerfile .
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/node-app:$VERSION
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/node-app:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:$VERSION
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:latest
 
   deploy:
     needs: docker
@@ -68,12 +68,12 @@ jobs:
           script: |
             set -e
             echo "Pulling latest Docker image..."
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/node-app:latest
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:latest
 
             echo "Stopping old container (if running)..."
             docker rm -f my-node-app || true
 
             echo "Starting new container..."
-            docker run -d --name my-node-app -p 3000:3000 ${{ secrets.DOCKERHUB_USERNAME }}/node-app:latest
+            docker run -d --name my-node-app -p 3000:3000 ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:latest
 
             echo "Deployment successful."
