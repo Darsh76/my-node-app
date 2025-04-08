@@ -12,25 +12,48 @@ jobs:
       contents: write
       pull-requests: write
       issues: write
+
     steps:
       - name: Release Please
         uses: googleapis/release-please-action@v4
         with:
           release-type: node
 
-  approve-pr:
-    needs: release
-    runs-on: ubuntu-latest
-    if: always()
-    steps:
-      - name: Auto Approve Release PR
-        uses: hmarr/auto-approve-action@v3
-        with:
-          github-token: ${{ secrets.GH_PAT }}
+      - name: Install GitHub CLI
+        run: sudo apt-get install gh -y
+
+      - name: Authenticate GitHub CLI
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: echo "${GH_TOKEN}" | gh auth login --with-token
+
+      - name: Auto-approve release PR
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          echo "Looking for open release PRs by github-actions[bot]..."
+          PR_NUMBER=$(gh pr list --author "github-actions[bot]" --state open --json number --jq '.[0].number')
+          echo "Found PR #$PR_NUMBER"
+          if [ -n "$PR_NUMBER" ]; then
+            gh pr review "$PR_NUMBER" --approve
+          else
+            echo "No open release PR found."
+          fi
+
+      - name: Auto-merge release PR
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          if [ -n "$PR_NUMBER" ]; then
+            gh pr merge "$PR_NUMBER" --merge --admin
+          else
+            echo "No PR to merge."
+          fi
 
   deploy:
-    needs: [release, approve-pr]
+    needs: release
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -46,10 +69,14 @@ jobs:
             set -e
             echo "Connecting to EC2 Instance..."
             cd /home/ubuntu/my-node-app || exit 1
+            echo "Current Directory: $(pwd)"
+            echo "Node Version: $(node -v)"
             echo "Git Status Before Pull:"
             git status || exit 1
             git pull origin main || exit 1
+            echo "Installing required packages..."
             npm install
+            echo "Restarting application using PM2..."
             pm2 restart my-node-app || pm2 start index.js --name my-node-app
             pm2 save
             echo "Deployment Completed Successfully"
