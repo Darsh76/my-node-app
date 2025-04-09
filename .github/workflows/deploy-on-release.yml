@@ -45,4 +45,4 @@ jobs:
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:latest
             docker rm -f my-node-app || true
             docker image prune -f
-            docker run -d --name my-node-app -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:latest
+            docker run -d --name my-node-app -p 443:443 ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:latest
