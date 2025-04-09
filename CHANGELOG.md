@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/Darsh76/my-node-app/compare/v2.0.0...v2.0.1) (2025-04-09)
+
+
+### Bug Fixes
+
+* fixed port number ([cc31907](https://github.com/Darsh76/my-node-app/commit/cc319076f122d88590413126133d8bda3c08ac0e))
+
 ## [2.0.0](https://github.com/Darsh76/my-node-app/compare/v1.7.0...v2.0.0) (2025-04-09)
 
 
