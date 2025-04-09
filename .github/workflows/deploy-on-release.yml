@@ -44,5 +44,5 @@ jobs:
           script: |
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:latest
             docker rm -f my-node-app || true
-            docker run -d --name my-node-app -p 3000:3000 ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:latest
-
+            docker image prune -f
+            docker run -d --name my-node-app -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:latest
