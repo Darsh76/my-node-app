@@ -28,7 +28,6 @@ jobs:
 
   docker:
     needs: release
-    if: needs.release.outputs.release_created == 'true'
     runs-on: ubuntu-latest
 
     steps:
@@ -44,8 +43,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Set version from release-please
-        run: echo "VERSION=${{ needs.release.outputs.tag_name }}" >> $GITHUB_ENV
+      - name: Set VERSION with fallback if empty
+        run: |
+          VERSION=${{ needs.release.outputs.tag_name }}
+          if [ -z "$VERSION" ]; then
+            VERSION="manual-$(date +%Y%m%d%H%M%S)"
+            echo "No release tag found. Using fallback VERSION=$VERSION"
+          else
+            echo "Using release tag VERSION=$VERSION"
+          fi
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Build and Push Docker Image
         run: |
