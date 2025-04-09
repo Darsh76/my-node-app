@@ -1,4 +1,4 @@
-name: Release, Build, and Deploy Node App
+name: Release and Deploy My Node App
 
 on:
   push:
@@ -8,7 +8,6 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-
     permissions:
       contents: write
       pull-requests: write
@@ -19,6 +18,9 @@ jobs:
       tag_name: ${{ steps.release.outputs.tag_name }}
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
       - name: Release Please
         id: release
         uses: googleapis/release-please-action@v4
@@ -26,44 +28,35 @@ jobs:
           release-type: node
           token: ${{ secrets.GH_PAT }}
 
-  docker:
+      - name: Install GitHub CLI
+        run: sudo apt-get install gh -y
+
+      - name: Auto-approve and merge release PR
+        if: steps.release.outputs.release_created != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          echo "Looking for open release PRs by github-actions[bot]..."
+          PR_NUMBER=$(gh pr list --author "github-actions[bot]" --state open --json number --jq '.[0].number')
+          echo "Found PR #$PR_NUMBER"
+          if [ -n "$PR_NUMBER" ]; then
+            echo "Approving PR #$PR_NUMBER..."
+            gh pr review "$PR_NUMBER" --approve
+            echo "Merging PR #$PR_NUMBER..."
+            gh pr merge "$PR_NUMBER" --merge --admin
+          else
+            echo "No open release PR found."
+          fi
+
+  deploy:
     needs: release
+    if: needs.release.outputs.release_created == 'true' # Only deploy on new release
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Set VERSION from release-please
-        run: |
-          echo "Release tag received: ${{ needs.release.outputs.tag_name }}"
-          if [ -z "${{ needs.release.outputs.tag_name }}" ]; then
-            echo "ERROR: No release tag found. Aborting Docker build."
-            exit 1
-          fi
-          echo "VERSION=${{ needs.release.outputs.tag_name }}" >> $GITHUB_ENV
-
-      - name: Build and Push Docker Image
-        run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:$VERSION \
-                       -t ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:latest -f ./Dockerfile .
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:$VERSION
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:latest
-
-  deploy:
-    needs: docker
-    runs-on: ubuntu-latest
-
-    steps:
       - name: Deploy using SSH
         uses: appleboy/ssh-action@master
         with:
@@ -73,10 +66,16 @@ jobs:
           port: ${{ secrets.MY_NODE_APP_PORT }}
           script: |
             set -e
-            echo "Pulling latest Docker image..."
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:latest
-            echo "Stopping old container (if running)..."
-            docker rm -f my-node-app || true
-            echo "Starting new container..."
-            docker run -d --name my-node-app -p 3000:3000 ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:latest
-            echo "Deployment successful."
+            echo "Connecting to EC2 Instance..."
+            cd /home/ubuntu/my-node-app || exit 1
+            echo "Current Directory: $(pwd)"
+            echo "Node Version: $(node -v)"
+            echo "Git Status Before Pull:"
+            git status || exit 1
+            git pull origin main || exit 1
+            echo "Installing required packages..."
+            npm install
+            echo "Restarting application using PM2..."
+            pm2 restart my-node-app || pm2 start index.js --name my-node-app
+            pm2 save
+            echo "Deployment Completed Successfully ✅"
