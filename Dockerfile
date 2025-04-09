@@ -29,7 +29,7 @@ COPY --from=builder /app /app
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose both backend and proxy ports
-EXPOSE 80 3000
+EXPOSE 80 3000 443
 
 # Start Node.js (via PM2) and Nginx together
 CMD sh -c "pm2 start index.js && nginx -g 'daemon off;'"
