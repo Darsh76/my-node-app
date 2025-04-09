@@ -43,16 +43,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Set VERSION with fallback if empty
+      - name: Set VERSION from release-please
         run: |
-          VERSION=${{ needs.release.outputs.tag_name }}
-          if [ -z "$VERSION" ]; then
-            VERSION="manual-$(date +%Y%m%d%H%M%S)"
-            echo "No release tag found. Using fallback VERSION=$VERSION"
-          else
-            echo "Using release tag VERSION=$VERSION"
+          echo "Release tag received: ${{ needs.release.outputs.tag_name }}"
+          if [ -z "${{ needs.release.outputs.tag_name }}" ]; then
+            echo "ERROR: No release tag found. Aborting Docker build."
+            exit 1
           fi
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "VERSION=${{ needs.release.outputs.tag_name }}" >> $GITHUB_ENV
 
       - name: Build and Push Docker Image
         run: |
