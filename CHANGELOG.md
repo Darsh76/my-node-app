@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/Darsh76/my-node-app/compare/v1.6.0...v1.6.1) (2025-04-09)
+
+
+### Bug Fixes
+
+* Update deploy-node-app.yml ([0fdc570](https://github.com/Darsh76/my-node-app/commit/0fdc570c15eeb1a4016f9d5f5c6cb39b73fe748d))
+
 ## [1.6.0](https://github.com/Darsh76/my-node-app/compare/v1.5.0...v1.6.0) (2025-04-09)
 
 
