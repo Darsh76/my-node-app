@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.1.1](https://github.com/Darsh76/my-node-app/compare/v2.1.0...v2.1.1) (2025-04-09)
+
+
+### Bug Fixes
+
+* keys ([5d72955](https://github.com/Darsh76/my-node-app/commit/5d729552cbb6ea5048028d0e26b9a874f6c3fe55))
+* Update Dockerfile ([49af016](https://github.com/Darsh76/my-node-app/commit/49af016a778cd3d61cb8b88838df61ff8bd3edf3))
+* Update nginx.conf ([194eb1f](https://github.com/Darsh76/my-node-app/commit/194eb1fc0dbfd9280360faf5b6bf3fa79d295427))
+* Update nginx.conf ([606156c](https://github.com/Darsh76/my-node-app/commit/606156c75ffc0bad868479d1bc973beea7dbbfa6))
+
 ## [2.1.0](https://github.com/Darsh76/my-node-app/compare/v2.0.4...v2.1.0) (2025-04-09)
 
 
