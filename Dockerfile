@@ -1,23 +1,36 @@
-# Base image
-FROM node:22-alpine
+# -------------------
+# Stage 1: Build Node.js App
+# -------------------
+FROM node:22-alpine as builder
 
-# Install PM2 globally
-RUN npm install -g pm2
-
-# Create app directory
 WORKDIR /app
 
-# Copy package files
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install --production
 
-# Copy all source code
 COPY . .
 
-# Expose the port your app runs on
-EXPOSE 3000
+# -------------------
+# Stage 2: Final image with Nginx + Node.js + PM2
+# -------------------
+FROM nginx:alpine
 
-# Start the app with PM2
-CMD ["pm2-runtime", "index.js"]
+# Install Node.js & PM2
+RUN apk add --no-cache nodejs npm && \
+    npm install -g pm2
+
+# Set working directory for app
+WORKDIR /app
+
+# Copy app from builder stage
+COPY --from=builder /app /app
+
+# Copy nginx config (overwriting default)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expose both backend and proxy ports
+EXPOSE 80 3000
+
+# Start Node.js (via PM2) and Nginx together
+CMD sh -c "pm2 start index.js && nginx -g 'daemon off;'"
+
