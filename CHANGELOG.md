@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0](https://github.com/Darsh76/my-node-app/compare/v2.0.4...v2.1.0) (2025-04-09)
+
+
+### Features
+
+* Update deploy-on-release.yml ([659c2e0](https://github.com/Darsh76/my-node-app/commit/659c2e03360d8b8ee70e8ae91a17f26ceefe590d))
+
+
+### Bug Fixes
+
+* Update Dockerfile ([f443801](https://github.com/Darsh76/my-node-app/commit/f4438019b48df13b881aeb0204fdbc6a2ce83b59))
+
 ## [2.0.4](https://github.com/Darsh76/my-node-app/compare/v2.0.3...v2.0.4) (2025-04-09)
 
 
