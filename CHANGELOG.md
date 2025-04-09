@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.7.0](https://github.com/Darsh76/my-node-app/compare/v1.6.1...v1.7.0) (2025-04-09)
+
+
+### Features
+
+* Create release-please.yml ([77cada9](https://github.com/Darsh76/my-node-app/commit/77cada9bfc9e5bdc62829f92f25df2c618bef30e))
+
+
+### Bug Fixes
+
+* Update and rename deploy-node-app.yml to deploy-on-release.yml ([64ad744](https://github.com/Darsh76/my-node-app/commit/64ad744abb9e4605cb0cb723847b098309b4e9a9))
+
 ## [1.6.1](https://github.com/Darsh76/my-node-app/compare/v1.6.0...v1.6.1) (2025-04-09)
 
 
