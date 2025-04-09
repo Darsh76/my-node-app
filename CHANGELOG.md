@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.4](https://github.com/Darsh76/my-node-app/compare/v2.0.3...v2.0.4) (2025-04-09)
+
+
+### Bug Fixes
+
+* Update nginx.conf ([4c56d72](https://github.com/Darsh76/my-node-app/commit/4c56d72017567446ee20cd7447b9b0cf21a7ecf4))
+
 ## [2.0.3](https://github.com/Darsh76/my-node-app/compare/v2.0.2...v2.0.3) (2025-04-09)
 
 
