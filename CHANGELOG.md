@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2](https://github.com/Darsh76/my-node-app/compare/v2.0.1...v2.0.2) (2025-04-09)
+
+
+### Bug Fixes
+
+* auto approve ([b48d0a8](https://github.com/Darsh76/my-node-app/commit/b48d0a85f2f7b0d7422a8f50325aca0dfea64730))
+
 ## [2.0.1](https://github.com/Darsh76/my-node-app/compare/v2.0.0...v2.0.1) (2025-04-09)
 
 
