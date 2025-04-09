@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/Darsh76/my-node-app/compare/v1.6.0...v1.7.0) (2025-04-09)
+
+
+### Features
+
+* add basic healthcheck endpoint ([e02f268](https://github.com/Darsh76/my-node-app/commit/e02f26825e5544f22f80c0773e66e601e414a950))
+
 ## [1.6.0](https://github.com/Darsh76/my-node-app/compare/v1.5.0...v1.6.0) (2025-04-09)
 
 
