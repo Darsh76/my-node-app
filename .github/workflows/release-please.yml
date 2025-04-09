@@ -26,17 +26,3 @@ jobs:
       - name: Install GitHub CLI
         run: sudo apt-get install gh -y
 
-      - name: Auto-approve and Merge Release PR
-        env:
-          GH_TOKEN: ${{ secrets.GH_PAT }}
-        run: |
-          echo "Looking for release PR..."
-          PR_NUMBER=$(gh pr list --author "github-actions[bot]" --state open --json number --jq '.[0].number')
-          if [ -n "$PR_NUMBER" ]; then
-            echo "Approving and merging PR #$PR_NUMBER"
-            gh pr review "$PR_NUMBER" --approve
-            gh pr merge "$PR_NUMBER" --merge --admin
-          else
-            echo "No open PR from release-please"
-          fi
-
