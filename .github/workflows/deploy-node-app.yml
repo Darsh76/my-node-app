@@ -28,6 +28,7 @@ jobs:
 
   docker:
     needs: release
+    if: needs.release.outputs.release_created == 'true'
     runs-on: ubuntu-latest
 
     steps:
@@ -49,7 +50,7 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:$VERSION \
-                       -t ${{ secrets.DOCKERHUB_USERNAME }}/node-app:latest -f ./Dockerfile .
+                       -t ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:latest -f ./Dockerfile .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:$VERSION
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:latest
 
@@ -69,11 +70,8 @@ jobs:
             set -e
             echo "Pulling latest Docker image..."
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:latest
-
             echo "Stopping old container (if running)..."
             docker rm -f my-node-app || true
-
             echo "Starting new container..."
             docker run -d --name my-node-app -p 3000:3000 ${{ secrets.DOCKERHUB_USERNAME }}/node-app-sample:latest
-
             echo "Deployment successful."
