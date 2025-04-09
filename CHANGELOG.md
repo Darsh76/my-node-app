@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.3](https://github.com/Darsh76/my-node-app/compare/v2.0.2...v2.0.3) (2025-04-09)
+
+
+### Bug Fixes
+
+* ssl certificate ([dbbb8ef](https://github.com/Darsh76/my-node-app/commit/dbbb8ef8c74711b9e8964275c927a3d113bd7c5d))
+
 ## [2.0.2](https://github.com/Darsh76/my-node-app/compare/v2.0.1...v2.0.2) (2025-04-09)
 
 
