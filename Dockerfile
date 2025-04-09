@@ -28,6 +28,10 @@ COPY --from=builder /app /app
 # Copy nginx config (overwriting default)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
+# Copy SSL certificate files
+COPY fullchain.pem /etc/nginx/ssl/fullchain.pem
+COPY privkey.pem /etc/nginx/ssl/privkey.pem
+
 # Expose both backend and proxy ports
 EXPOSE 80 3000 443
 
