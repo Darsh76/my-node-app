@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.2](https://github.com/Darsh76/my-node-app/compare/v2.1.1...v2.1.2) (2025-04-10)
+
+
+### Bug Fixes
+
+* added keys ([6fee13a](https://github.com/Darsh76/my-node-app/commit/6fee13a5c769fe926455196a3af1942c4111fe77))
+
 ## [2.1.1](https://github.com/Darsh76/my-node-app/compare/v2.1.0...v2.1.1) (2025-04-09)
 
 
