@@ -37,5 +37,5 @@ COPY privkey.pem /etc/nginx/ssl/privkey.pem
 EXPOSE 80 3000 443
 
 # Start Node.js (via PM2) and Nginx together
-CMD sh -c "pm2 start index.js && nginx -g 'daemon off;'"
-
+#CMD sh -c "pm2 start index.js && nginx -g 'daemon off;'"
+CMD sh -c "node index.js & nginx -g 'daemon off;'"
