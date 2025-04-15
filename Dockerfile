@@ -17,7 +17,8 @@ FROM nginx:alpine
 
 # Install Node.js & PM2
 RUN apk add --no-cache nodejs npm && \
-    npm install -g pm2
+    npm install -g pm2 \
+    npm install -g express
 
 # Set working directory for app
 WORKDIR /app
