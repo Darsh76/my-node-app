@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.1.0](https://github.com/Darsh76/my-node-app/compare/v4.0.1...v4.1.0) (2025-04-15)
+
+
+### Features
+
+* solved 502 error ([eb66205](https://github.com/Darsh76/my-node-app/commit/eb66205ec0242ce6b83bd3511d90be4c91b4f747))
+* Update package-lock.json ([a710f83](https://github.com/Darsh76/my-node-app/commit/a710f83941261cd6fa0146693fff2becf3dd8c75))
+
 ## [4.0.1](https://github.com/Darsh76/my-node-app/compare/v4.0.0...v4.0.1) (2025-04-15)
 
 
