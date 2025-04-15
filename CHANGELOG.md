@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.1](https://github.com/Darsh76/my-node-app/compare/v4.0.0...v4.0.1) (2025-04-15)
+
+
+### Bug Fixes
+
+* Update Dockerfile ([162391a](https://github.com/Darsh76/my-node-app/commit/162391a16694824ab0072f6186f562050df46ec2))
+
 ## [4.0.0](https://github.com/Darsh76/my-node-app/compare/v3.0.0...v4.0.0) (2025-04-15)
 
 
