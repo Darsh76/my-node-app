@@ -1,13 +1,26 @@
-const http = require('http');
-const PORT = 3000;
+const express = require('express');
+const app = express();
+const router = express.Router();
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello wednesday 1010!');
+const path = __dirname + '/views/';
+const port = 8080;
+
+router.use(function (req,res,next) {
+  console.log('/' + req.method);
+  next();
 });
 
-server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
+router.get('/', function(req,res){
+  res.sendFile(path + 'index.html');
 });
-console.log("App started - version bump test");
+
+router.get('/sharks', function(req,res){
+  res.sendFile(path + 'sharks.html');
+});
+
+app.use(express.static(path));
+app.use('/', router);
+
+app.listen(port, function () {
+  console.log('Example app listening on port 8080!')
+})
