@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.0.0](https://github.com/Darsh76/my-node-app/compare/v2.1.2...v3.0.0) (2025-04-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* changed ui
+
+### Features
+
+* changed ui ([0a4d612](https://github.com/Darsh76/my-node-app/commit/0a4d612914f60c433b74f78f95aaf24400a226a1))
+
+
+### Bug Fixes
+
+* fixed port setting ([8fc3345](https://github.com/Darsh76/my-node-app/commit/8fc33458bc7d509d90b1a923ca04a5db1b9a8bd0))
+
 ## [2.1.2](https://github.com/Darsh76/my-node-app/compare/v2.1.1...v2.1.2) (2025-04-10)
 
 
